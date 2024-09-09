@@ -66,7 +66,7 @@ NCC(I_1',I_2)={\sum_{i,j}(I_1')_{i,j}(I_2)_{i,j}\over ||I_1'||_F||I_2||_F},
 $$
 where $||\cdot||_F$ denotes the Frobenius norm just equal to the square root of the sum of all squared elements in the matrix.
 
-## 2.4 Results for JPEGstif
+## 2.4 Results for JPEGs
 
 With exhaustive search implemented, we are able to find decent displacements for the images. These are the results and their displacement vectors.
 
@@ -185,7 +185,7 @@ NCC and SSD lead to same displacement results. Also, in the TIFF-processing stag
 </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p1_pics/pyramid/onion_church.jpg" alt="onion_church" style="width: 400px;"tif>
+    <img src="p1_pics/pyramid/onion_church.jpg" alt="onion_church" style="width: 400px;">
     <figcaption>Onion Church</figcaption>
     <figcaption>Green: (51, 26)<br>Red: (108, 36)</figcaption>
   </figure>
@@ -239,7 +239,7 @@ where $x_{i,j}$ denotes the pixel in $I_1'$ in the position $(i,j)$, i.e. $x_{i,
 
 For the probability symbols, $P(\cdot,\cdot)$ denotes the joint probability of two pixel values appearing in the same position within the two images, and $P_1(\cdot)$ denotes the marginal probability that one pixel value appears in $I_1'$, and $P_2(\cdot)$ is that for $I_2$.
 
-Because the mutual information [quantifies](https://en.wikipedia.org/wiki/Mutual_information#) the "amount of information" obtained about one variable when observing another variable, it is better when the mutual information is higher. So we maximize the MI metric for the best displacement of G/R with B as reference.
+Because the mutual information [quantifies](https://en.wikipedia.org/wiki/Mutual_information#) the "amount of information" obtained about one variable when observing another variable, it is better when the mutual information is higher. So we **maximize** the MI metric for the best displacement of G/R with B as reference.
 
 ### 4.1.1 The Emir w.r.t. MI
 
@@ -274,7 +274,8 @@ s(A,B)={\sigma_{AB}+C_3\over \sigma_A\sigma_B+C_3},
 $$
 where $\mu_A$ and $\mu_B$ are the means of $A$ and $B$, $\sigma_A$ and $\sigma_B$ are the standard deviations of $A$ and $B$, and $\sigma_{AB}$ is the covariance of $A$ and $B$. $C_1$, $C_2$, and $C_3$ are constants to avoid zero denominators.
 
-In the most common case, $\alpha=\beta=\gamma=1$, and $C_1=(k_1L)^2$, $C_2=(k_2L)^2$, $C_3=C_2/2$, where $L$ is the dynamic range of the pixel values, and $k_1=0.01$ and $k_2=0.03$ are constants.
+In the most common case, $\alpha=\beta=\gamma=1$, and $C_1=(k_1L)^2$, $C_2=(k_2L)^2$, $C_3=C_2/2$, where $L$ is the dynamic range or the data range of the pixel values, and $k_1=0.01$ and $k_2=0.03$ are constants.
+
 We can thus simplify the SSIM metric as
 $$
 SSIM(A,B)={2\mu_A\mu_B+C_1\over \mu_A^2+\mu_B^2+C_1}\cdot{2\sigma_A\sigma_B+C_2\over \sigma_A^2+\sigma_B^2+C_2}\cdot{\sigma_{AB}+C_3\over \sigma_A\sigma_B+C_3}=
@@ -282,6 +283,12 @@ SSIM(A,B)={2\mu_A\mu_B+C_1\over \mu_A^2+\mu_B^2+C_1}\cdot{2\sigma_A\sigma_B+C_2\
 \\
 {\frac {(2\mu _{A}\mu _{B}+C_1)(2\sigma _{AB}+C_2)}{(\mu _{A}^{2}+\mu _{B}^{2}+C_1)(\sigma _{A}^{2}+\sigma _{B}^{2}+C_2)}}.
 $$
+
+We **maximize** the simplified SSIM metric to find the best alignment, because it evaluates the similarity between two images. 
+
+In application, because human eyes perceive an image in a localized way ([Saccadic Eye Movement](https://www.physiotutors.com/wiki/saccadic-eye-movement/#:~:text=To start the exam%2C the,moved in several different directions.)), so we find the means and variances of a localized part (a window with a uniform filter). We first convolute the image through the filter, and then find the overall mean value of the convoluted image.
+
+
 
 ### 4.2.1 The Emir w.r.t. SSIM
 
@@ -300,9 +307,35 @@ It takes about 30s to run, which is better than MI and still slower than SSD/NCC
 
 Edge detection algorithms can also used to solve the problem of emir. We implement the method that first detect the edges of three channels, and then align the edges, output the displacements to the original image and finally roll the original image by the displacements created by the edge alignment.
 
-We align the edges by the image pyramid speed-up method and the SSD metric.
+We align the edge images by the image pyramid speed-up method and the SSD metric, so this can be seen as another kind of preprocessing or feature engineering of images fed into searching methods.
 
 ## 5.1 Canny Edge Detection
+
+The Canny Algorithm for edge detection is a renowned algorithm with merits such as high accuracy and high resolution of edges detected.
+
+### 5.1.1 Algorithm Overview
+
+The Canny edge detection is divided in 4 steps in order.
+
+1. Use the Gaussian filter to smooth the image $I$ and deal with the noise: $I\gets K_G*I$, where $K_G$ is the filter kernel.
+
+2. Use the [Sobel operator](https://en.wikipedia.org/wiki/Sobel_operator) as a filter to estimate the gradients of the image $G$:
+   $$
+   G_x=\begin{bmatrix}-1&0&1\\-2&0&2\\-1&0&1\end{bmatrix}*I
+   \\
+   G_y=\begin{bmatrix}-1&-2&-1\\0&0&0\\1&2&1\end{bmatrix}*I
+   \\
+   G=\sqrt{G_x^2+G_y^2},\theta=\arctan(G_y/G_x),
+   $$
+   where the root and the arctan are elementwise. The gradients are defined as $G_x(i,j)=I_{i+1,j}-I_{i,j}$, and $G_y(i,j)=I_{i,j+1}-I_{i,j}$.
+
+3. Non-maximum suppression, which is to generate the edge from the gradient matrix by setting all zero to non-maximum pixels around one pixel along the max-gradient direction.
+
+4. Set low and high thresholds for gradients. Gradients higher than the high threshold will be seen as edges, those lower than the low threshold will be seen as non-edges. Those in between will be seen as edges only if there are 2 higher-than-threshold gradient pixels around.
+
+Once these steps are complete, we can use these the edge images (final-processed $I$) to do the same alignment using the same set of metrics and the image pyramid method.
+
+### 5.1.2 Result
 
 The result is shown as:
 
@@ -327,8 +360,17 @@ The edges detected is shown as follows:
     <figcaption>R</figcaption>
   </figure>
 </div>
-
 ## 5.2 Sobel Edge Detection
+
+### 5.2.1 Algorithm Overview
+
+This algorithm, though much simpler than the last one, can also generate good edge detection results for us to align the channels.
+
+This involves using the Sobel operator mentioned above to find $G_x$ and $G_y$, and create an image with edges by simply cauculate $G=\sqrt{G_x^2+G_y^2}$.
+
+### 5.2.2 Result
+
+Because this algorithm is relatively simple, the detected edges here appear rougher than the Canny's result. 
 
 The result is shown as:
 
