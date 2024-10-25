@@ -2,7 +2,7 @@
 
 <img src="p4a_pics/mosaic/mosaic_3_blend.png" alt="morphtitle" style="zoom: 200%;" />
 
-## Programming Project #4a (`proj4a`)
+## Programming Project #4 (`proj4`)
 
 *COMPSCI 180 [Intro to Computer Vision and Computational Photography](https://inst.eecs.berkeley.edu/~cs180/fa24/)*
 
@@ -10,7 +10,10 @@ Chuyan Zhou
 
 This webpage uses the Typora **Newsprint** theme of markdown files.
 
-# Part 1: Shoot the pictures
+# Part A
+
+## 1. Shoot the pictures
+
 I took two pictures of one place in my Minecraft world. It's visible that the two pictures have different perspectives, and there is a projective relationship between the two pictures, especially embodied on the surface of the main building. The two pictures are shown below:
 
 <div style="display: flex; justify-content: space-around;">
@@ -36,7 +39,7 @@ I took two pictures of one place in my Minecraft world. It's visible that the tw
 </div>
 I think the effort of configuring & taking photos in **games** with perspective properties may be seen as one kind of B&W in the "own idea" section.
 
-# Part 2: Recover Homographies
+## 2. Recover Homographies
 Given there is a projective relationship between these two images, we know that we can use a homography matrix $H$ to transform the points in one image to the other. More technically, the homography matrix can work as a transformation matrix to warp the points in one image to the other. Here is the mathmatical model of the homography matrix:
 
 Given a point $p = (x, y)^T$ in the first image, and its corresponding point $p' = (wx', wy')^T$ in the second image, we have the following equation:
@@ -107,7 +110,7 @@ $$
 \min_{h} ||Ah - b||^2
 $$
 
-# Part 3: Warp the images
+## 3. Warp the images
 
 After we have the homography matrix $H$, we can warp the points in one image to the other. The warping process can be done by the following steps:
 
@@ -269,7 +272,35 @@ Here $n = 2$ in our blending process: even though we have multiple images, we ca
 
 This seems much better.
 
-I also implemented 3-image warping and blending:
+I also implemented 3-image warping and blending.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/mosaic/mosaic_3_blend.png" alt="" style="width: 1600px;">
+      <figcaption>Distance-transform-blended Image, but from 3 images</figcaption>
+  </figure> 
+</div>
+
+## 5.3 Deliverables: 3 Mosaics
+
+Here lays my 3 done mosaics.
+
+### 5.3.1 Minecraft City 1
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/1.png" alt="" style="width: 1600px;">
+      <figcaption>Image 1</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/3.png" alt="Image 2" style="width: 1600px;">
+    	<figcaption>Image 2</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/2.png" alt="Image 2" style="width: 1600px;">
+    	<figcaption>Image 3</figcaption>
+  </figure>
+</div>
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
