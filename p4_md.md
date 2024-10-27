@@ -40,7 +40,7 @@ I think the effort of configuring & taking photos in **games** with perspective 
 ## 2. Recover Homographies
 Given there is a projective relationship between these two images, we know that we can use a homography matrix $H$ to transform the points in one image to the other. More technically, the homography matrix can work as a transformation matrix to warp the points in one image to the other. Here is the mathmatical model of the homography matrix:
 
-Given a point $p = (x, y)^T$ in t	he first image, and its corresponding point $p' = (wx', wy')^T$ in the second image, we have the following equation:
+Given a point $p = (x, y)^T$ in the first image, and its corresponding point $p' = (wx', wy')^T$ in the second image, we have the following equation:
 $$
 \begin{bmatrix}
 wx' \\
@@ -446,21 +446,7 @@ We also visualize the patches without being flattened and normalized as raw feat
 
 ### 2.2 Rotation-Invariant Descriptors (*Bells & Whistles*)
 
-We compute the orientation of the corner points, rotate the image accordingly (which is equivalent to rotating the window) and slice from a window to make the feature descriptors rotation-invariant. The gradients and orientations are computed using the Sobel operator, from grayscale version of the image.
-
-<div style="display: flex; justify-content: space-around;">
-  <figure style="text-align: center; margin: 10px;">
-    <img src="p4b_pics/2_feature_description/k1_corners_with_orientations.png" alt="" style="width: 1600px;">
-      <figcaption>Rotation-invariant descriptors</figcaption>
-  </figure> 
-</div>
-
-<div style="display: flex; justify-content: space-around;">
-  <figure style="text-align: center; margin: 10px;">
-    <img src="p4b_pics/2_feature_description/k1_raw_descriptors_mops.png" alt="" style="width: 700px;">
-      <figcaption>First 121 raw descriptors (rotation invariant) of the image above (RGB-corresponded, not normalized, and not flattened)</figcaption>
-  </figure> 
-</div>
+This part is independently shown in B.5.
 
 ## 3. Feature Matching
 Now we have already extracted the feature descriptors from the image. The next step is to find the matches between the feature descriptors from the two images. We use the Squared Sum of Differences (SSD) to find the best matches between the feature descriptors from the two images. To further improve the matching and reduce the number of false matches, we use:
@@ -505,7 +491,9 @@ Finally, we generate the mosaic of the two images using the homography matrix ob
 
 Below are the deliverables, i.e. 3 mosaics with comparison between manually and automatically stitched images.
 
-#### Mosaic 1
+Here we only use axis-aligned feature descriptors. For the B&W: rotation-invariant descriptors, readers may see the part B.5.
+
+### Deliverables: 3 Mosaics
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
@@ -517,9 +505,6 @@ Below are the deliverables, i.e. 3 mosaics with comparison between manually and 
       <figcaption>Automatically Stitched</figcaption>
   </figure> 
 </div>
-
-#### Mosaic 2
-
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
     <img src="p4a_pics/mosaic/c_blended_distance.png" alt="" style="width: 1600px;">
@@ -530,9 +515,6 @@ Below are the deliverables, i.e. 3 mosaics with comparison between manually and 
       <figcaption>Automatically Stitched</figcaption>
   </figure> 
 </div>
-
-#### Mosaic 3
-
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
     <img src="p4a_pics/mosaic/k_blended_distance.png" alt="" style="width: 1600px;">
@@ -541,6 +523,58 @@ Below are the deliverables, i.e. 3 mosaics with comparison between manually and 
     <figure style="text-align: center; margin: 10px;">
     <img src="p4b_pics/4_mosaic/blended_distance.png" alt="" style="width: 1600px;">
       <figcaption>Automatically Stitched</figcaption>
+  </figure> 
+</div>
+
+## 5. Rotation-Invariant Descriptors
+
+We compute the orientation of the corner points, rotate the image accordingly (which is equivalent to rotating the window) and slice from a window to make the feature descriptors rotation-invariant. The gradients and orientations are computed using the Sobel operator, from grayscale version of the image.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4b_pics/2_feature_description/k1_corners_with_orientations.png" alt="" style="width: 1600px;">
+      <figcaption>Rotation-invariant descriptors</figcaption>
+  </figure> 
+</div>
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4b_pics/2_feature_description/k1_raw_descriptors_mops.png" alt="" style="width: 700px;">
+      <figcaption>First 121 raw descriptors (rotation invariant) of the image above (RGB-corresponded, not normalized, and not flattened)</figcaption>
+  </figure> 
+</div>
+### Deliverables: 3 Mosaics using Rotation-Invariant Descriptors
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/mosaic/1to3.png" alt="" style="width: 1600px;">
+      <figcaption>Manually Stitched</figcaption>
+  </figure> 
+    <figure style="text-align: center; margin: 10px;">
+    <img src="p4b_pics/1_3_rotinv.png" alt="" style="width: 1600px;">
+      <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
+  </figure> 
+</div>
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/mosaic/c_blended_distance.png" alt="" style="width: 1600px;">
+      <figcaption>Manually Stitched</figcaption>
+  </figure> 
+    <figure style="text-align: center; margin: 10px;">
+    <img src="p4b_pics/c1_c2_rotinv.png" alt="" style="width: 1600px;">
+      <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
+  </figure> 
+</div>
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/mosaic/k_blended_distance.png" alt="" style="width: 1600px;">
+      <figcaption>Manually Stitched</figcaption>
+  </figure> 
+    <figure style="text-align: center; margin: 10px;">
+    <img src="p4b_pics/4_mosaic/blended_distance_rotinv.png" alt="" style="width: 1600px;">
+      <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
   </figure> 
 </div>
 
