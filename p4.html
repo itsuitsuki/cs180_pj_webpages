@@ -787,19 +787,19 @@ mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
   </figure> 
 </div><h4 id='mosaic-3'><span>Mosaic 3</span></h4><div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p4a_pics/c1.png" alt="" style="width: 1600px;">
+    <img src="p4b_pics/c/c1.png" alt="" style="width: 1600px;">
       <figcaption>Image 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p4a_pics/c2.png" alt="Image 2" style="width: 1600px;">
+    <img src="p4b_pics/c/c2.png" alt="Image 2" style="width: 1600px;">
     	<figcaption>Image 2</figcaption>
   </figure>
 </div><div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p4a_pics/mosaic/c_blended_distance.png" alt="" style="width: 1600px;">
+    <img src="p4a_pics/mosaic/c_blended_distance_2.png" alt="" style="width: 1600px;">
       <figcaption>Mosaic</figcaption>
   </figure> 
-</div><h1 id='part-b'><span>Part B</span></h1><h2 id='1-corner-detection'><span>1. Corner detection</span></h2><h3 id='11-harris-interest-point-detector'><span>1.1 Harris Interest Point Detector</span></h3><p><span>Initially, to find feature points from an image, we pay attention to the corners. Corners are the regions in the image where the intensity of the image changes in all directions. The Harris corner detection (Interest point detection) is a corner detection algorithm that is commonly used in computer vision algorithms. Below is the implementation of the Harris corner detection algorithm. </span></p><p><span>The Harris corner detection algorithm is based on thresholding and finding the local maxima of the Harris response function. We set the threshold to 0.002 times the maximum of the Harris heatmap.</span></p><div style="display: flex; justify-content: space-around;">
+</div><p>&nbsp;</p><h1 id='part-b'><span>Part B</span></h1><h2 id='1-corner-detection'><span>1. Corner detection</span></h2><h3 id='11-harris-interest-point-detector'><span>1.1 Harris Interest Point Detector</span></h3><p><span>Initially, to find feature points from an image, we pay attention to the corners. Corners are the regions in the image where the intensity of the image changes in all directions. The Harris corner detection (Interest point detection) is a corner detection algorithm that is commonly used in computer vision algorithms. Below is the implementation of the Harris corner detection algorithm. </span></p><p><span>The Harris corner detection algorithm is based on thresholding and finding the local maxima of the Harris response function. We set the threshold to 0.002 times the maximum of the Harris heatmap.</span></p><div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
     <img src="p4b_pics/1_corner_detection/k1_harris.png" alt="" style="width: 1600px;">
       <figcaption>Harris corners detected</figcaption>
@@ -845,16 +845,6 @@ mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
 </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p4a_pics/mosaic/c_blended_distance.png" alt="" style="width: 1600px;">
-      <figcaption>Manually Stitched</figcaption>
-  </figure> 
-    <figure style="text-align: center; margin: 10px;">
-    <img src="p4b_pics/c1_c2.png" alt="" style="width: 1600px;">
-      <figcaption>Automatically Stitched</figcaption>
-  </figure> 
-</div>
-<div style="display: flex; justify-content: space-around;">
-  <figure style="text-align: center; margin: 10px;">
     <img src="p4a_pics/mosaic/k_blended_distance.png" alt="" style="width: 1600px;">
       <figcaption>Manually Stitched</figcaption>
   </figure> 
@@ -862,7 +852,16 @@ mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
     <img src="p4b_pics/4_mosaic/blended_distance.png" alt="" style="width: 1600px;">
       <figcaption>Automatically Stitched</figcaption>
   </figure> 
-</div><h2 id='5-rotation-invariant-descriptors'><span>5. Rotation-Invariant Descriptors</span></h2><p><span>We compute the orientation of the corner points, rotate the image accordingly (which is equivalent to rotating the window) and slice from a window to make the feature descriptors rotation-invariant. The gradients and orientations are computed using the Sobel operator, from grayscale version of the image.</span></p><div style="display: flex; justify-content: space-around;">
+</div><div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/mosaic/c_blended_distance_2.png" alt="" style="width: 1600px;">
+      <figcaption>Manually Stitched</figcaption>
+  </figure> 
+    <figure style="text-align: center; margin: 10px;">
+    <img src="p4b_pics/c/c1_c2.png" alt="" style="width: 1600px;">
+      <figcaption>Automatically Stitched</figcaption>
+  </figure> 
+</div><p>&nbsp;</p><h2 id='5-rotation-invariant-descriptors'><span>5. Rotation-Invariant Descriptors</span></h2><p><span>We compute the orientation of the corner points, rotate the image accordingly (which is equivalent to rotating the window) and slice from a window to make the feature descriptors rotation-invariant. The gradients and orientations are computed using the Sobel operator, from grayscale version of the image.</span></p><div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
     <img src="p4b_pics/2_feature_description/k1_corners_with_orientations.png" alt="" style="width: 1600px;">
       <figcaption>Rotation-invariant descriptors</figcaption>
@@ -881,22 +880,24 @@ mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
     <img src="p4b_pics/1_3_rotinv.png" alt="" style="width: 1600px;">
       <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
   </figure> 
-</div><div style="display: flex; justify-content: space-around;">
-  <figure style="text-align: center; margin: 10px;">
-    <img src="p4a_pics/mosaic/c_blended_distance.png" alt="" style="width: 1600px;">
-      <figcaption>Manually Stitched</figcaption>
-  </figure> 
-    <figure style="text-align: center; margin: 10px;">
-    <img src="p4b_pics/c1_c2_rotinv.png" alt="" style="width: 1600px;">
-      <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
-  </figure> 
-</div><div style="display: flex; justify-content: space-around;">
+</div>
+<div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
     <img src="p4a_pics/mosaic/k_blended_distance.png" alt="" style="width: 1600px;">
       <figcaption>Manually Stitched</figcaption>
   </figure> 
     <figure style="text-align: center; margin: 10px;">
     <img src="p4b_pics/4_mosaic/blended_distance_rotinv.png" alt="" style="width: 1600px;">
+      <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
+  </figure> 
+</div>
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/mosaic/c_blended_distance_2.png" alt="" style="width: 1600px;">
+      <figcaption>Manually Stitched</figcaption>
+  </figure> 
+    <figure style="text-align: center; margin: 10px;">
+    <img src="p4b_pics/c/c1_c2_rotinv.png" alt="" style="width: 1600px;">
       <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
   </figure> 
 </div><h2 id='what-ive-learned'><span>What I&#39;ve learned?</span></h2><p><span>In part A, I have learned the perspective projection, the importance of fixing COP while taking photos, the fine-grained details of recovering homography matrices &amp; warping images, and the distance transform method to blend images.</span></p><p><span>In part B, I have learned various algorithms for detecting &amp; selecting feature points, expressing features, matching features (as well as reducing them to a reasonable amount correctly).</span></p><p>&nbsp;</p></div></div>

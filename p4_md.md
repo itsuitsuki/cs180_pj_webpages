@@ -363,21 +363,22 @@ Here lays my 3 done mosaics.
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p4a_pics/c1.png" alt="" style="width: 1600px;">
+    <img src="p4b_pics/c/c1.png" alt="" style="width: 1600px;">
       <figcaption>Image 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p4a_pics/c2.png" alt="Image 2" style="width: 1600px;">
+    <img src="p4b_pics/c/c2.png" alt="Image 2" style="width: 1600px;">
     	<figcaption>Image 2</figcaption>
   </figure>
 </div>
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p4a_pics/mosaic/c_blended_distance.png" alt="" style="width: 1600px;">
+    <img src="p4a_pics/mosaic/c_blended_distance_2.png" alt="" style="width: 1600px;">
       <figcaption>Mosaic</figcaption>
   </figure> 
 </div>
+
 
 # Part B
 
@@ -507,16 +508,6 @@ Here we only use axis-aligned feature descriptors. For the B&W: rotation-invaria
 </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p4a_pics/mosaic/c_blended_distance.png" alt="" style="width: 1600px;">
-      <figcaption>Manually Stitched</figcaption>
-  </figure> 
-    <figure style="text-align: center; margin: 10px;">
-    <img src="p4b_pics/c1_c2.png" alt="" style="width: 1600px;">
-      <figcaption>Automatically Stitched</figcaption>
-  </figure> 
-</div>
-<div style="display: flex; justify-content: space-around;">
-  <figure style="text-align: center; margin: 10px;">
     <img src="p4a_pics/mosaic/k_blended_distance.png" alt="" style="width: 1600px;">
       <figcaption>Manually Stitched</figcaption>
   </figure> 
@@ -525,6 +516,18 @@ Here we only use axis-aligned feature descriptors. For the B&W: rotation-invaria
       <figcaption>Automatically Stitched</figcaption>
   </figure> 
 </div>
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/mosaic/c_blended_distance_2.png" alt="" style="width: 1600px;">
+      <figcaption>Manually Stitched</figcaption>
+  </figure> 
+    <figure style="text-align: center; margin: 10px;">
+    <img src="p4b_pics/c/c1_c2.png" alt="" style="width: 1600px;">
+      <figcaption>Automatically Stitched</figcaption>
+  </figure> 
+</div>
+
 
 ## 5. Rotation-Invariant Descriptors
 
@@ -555,18 +558,6 @@ We compute the orientation of the corner points, rotate the image accordingly (w
       <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
   </figure> 
 </div>
-
-<div style="display: flex; justify-content: space-around;">
-  <figure style="text-align: center; margin: 10px;">
-    <img src="p4a_pics/mosaic/c_blended_distance.png" alt="" style="width: 1600px;">
-      <figcaption>Manually Stitched</figcaption>
-  </figure> 
-    <figure style="text-align: center; margin: 10px;">
-    <img src="p4b_pics/c1_c2_rotinv.png" alt="" style="width: 1600px;">
-      <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
-  </figure> 
-</div>
-
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
     <img src="p4a_pics/mosaic/k_blended_distance.png" alt="" style="width: 1600px;">
@@ -574,6 +565,16 @@ We compute the orientation of the corner points, rotate the image accordingly (w
   </figure> 
     <figure style="text-align: center; margin: 10px;">
     <img src="p4b_pics/4_mosaic/blended_distance_rotinv.png" alt="" style="width: 1600px;">
+      <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
+  </figure> 
+</div>
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p4a_pics/mosaic/c_blended_distance_2.png" alt="" style="width: 1600px;">
+      <figcaption>Manually Stitched</figcaption>
+  </figure> 
+    <figure style="text-align: center; margin: 10px;">
+    <img src="p4b_pics/c/c1_c2_rotinv.png" alt="" style="width: 1600px;">
       <figcaption>Automatically Stitched (with rotation-invariant descriptors)</figcaption>
   </figure> 
 </div>
