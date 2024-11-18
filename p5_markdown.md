@@ -9,6 +9,12 @@
     <img src="p5a_pics/2/logo/result.png" alt="" style="width: 400px;">
   </figure>
 </div>
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/classcond/epoch_20_animation.gif" alt="Epoch 20 Animation" style="width: 800px;">
+  </figure>
+</div>
+
 
 
 ## Programming Project #5 (`proj5`)
@@ -28,9 +34,7 @@ This webpage uses the Typora **Academic** theme of markdown files.
 We first use 3 prompts to let the model generate output images. Here are images and captions displayed below, with different inference steps:
 
 + 5 steps (i.e. `num_inference_steps=5`):
-
   + Size: 64px * 64px (Stage 1)
-
     <div style="display: flex; justify-content: space-around;">
       <figure style="text-align: center; margin: 10px;">
         <img src="p5a_pics/0/stage_1_im_0_step5.png" alt="" style="width: 128px;">
@@ -45,9 +49,7 @@ We first use 3 prompts to let the model generate output images. Here are images 
         	<figcaption>a rocket ship</figcaption>
       </figure>
     </div>
-
   + Size: 256px * 256px (Stage 2)
-
     <div style="display: flex; justify-content: space-around;">
       <figure style="text-align: center; margin: 10px;">
         <img src="p5a_pics/0/stage_2_im_0_step5.png" alt="" style="width: 512px;">
@@ -62,14 +64,8 @@ We first use 3 prompts to let the model generate output images. Here are images 
         	<figcaption>a rocket ship</figcaption>
       </figure>
     </div>
-
-
-
 + 20 steps:
-
-
   + Stage 1:
-
     <div style="display: flex; justify-content: space-around;">
       <figure style="text-align: center; margin: 10px;">
         <img src="p5a_pics/0/stage_1_im_0_step20.png" alt="" style="width: 128px;">
@@ -84,9 +80,7 @@ We first use 3 prompts to let the model generate output images. Here are images 
         	<figcaption>a rocket ship</figcaption>
       </figure>
     </div>
-
   + Stage 2:
-
     <div style="display: flex; justify-content: space-around;">
       <figure style="text-align: center; margin: 10px;">
         <img src="p5a_pics/0/stage_2_im_0_step20.png" alt="" style="width: 512px;">
@@ -101,12 +95,8 @@ We first use 3 prompts to let the model generate output images. Here are images 
         	<figcaption>a rocket ship</figcaption>
       </figure>
     </div>
-
-
 + 100 steps:
-
   + Stage 1:
-
     <div style="display: flex; justify-content: space-around;">
       <figure style="text-align: center; margin: 10px;">
         <img src="p5a_pics/0/stage_1_im_0_step100.png" alt="" style="width: 128px;">
@@ -121,9 +111,7 @@ We first use 3 prompts to let the model generate output images. Here are images 
         	<figcaption>a rocket ship</figcaption>
       </figure>
     </div>
-
   + Stage 2:
-
     <div style="display: flex; justify-content: space-around;">
       <figure style="text-align: center; margin: 10px;">
         <img src="p5a_pics/0/stage_2_im_0_step100.png" alt="" style="width: 512px;">
@@ -158,12 +146,12 @@ We use the seed `SEED=42` in this project part.
 A key part of diffusion is the forward process, which takes a clean image and adds noise to it.
 
 $$
-q(x_t | x_0) = N(x_t ; \sqrt{\bar\alpha_t} x_0, (1 - \bar\alpha_t)\mathbf{I})\tag{1}
+q(x_t | x_0) = N(x_t ; \sqrt{\bar\alpha_t} x_0, (1 - \bar\alpha_t)I)\tag{1}
 $$
 
 which is equivalent to an equation giving $x_t$:
 $$
-x_t = \sqrt{\bar\alpha_t} x_0 + \sqrt{1 - \bar\alpha_t} \epsilon \quad \text{where}~ \epsilon \sim N(0, 1) \tag{2}
+x_t = \sqrt{\bar\alpha_t} x_0 + \sqrt{1 - \bar\alpha_t} \epsilon \quad \text{where}~ \epsilon \sim N(0, I) \tag{2}
 $$
 
 That is, given a clean image $x_0$, we get a noisy image $ x_t $ at timestep $t$ by sampling from a Gaussian with mean $ \sqrt{\bar\alpha_t} x_0 $ and variance $ (1 - \bar\alpha_t) $. Note that the forward process is not *_just_* adding noise -- we also scale the image by $\sqrt{\bar\alpha_t}$ and scale the noise by $\sqrt{1-\bar\alpha_t}$. The alpha's cumulated product is actually an equivalent from an iterative noise adding with scheduled $\alpha_t$'s, which is expressed as $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$. $\bar\alpha_t$ is close to 1 for small $t$, and close to 0 for large $t$. 
@@ -414,105 +402,105 @@ We use given noise levels [1, 3, 5,7, 10, 20] and the "null" prompt i.e. `"a hig
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/0/1_t_960.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 1</figcaption>
+    <img src="p5a_pics/1/7/0/1_t_960.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/0/3_t_900.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 3</figcaption>
+    <img src="p5a_pics/1/7/0/3_t_900.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 3</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/0/5_t_840.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 5</figcaption>
+    <img src="p5a_pics/1/7/0/5_t_840.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 5</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/0/7_t_780.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 7</figcaption>
+    <img src="p5a_pics/1/7/0/7_t_780.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 7</figcaption>
+  </figure>
   </div>
 <div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5a_pics/1/7/0/10_t_690.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 10</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/0/10_t_690.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 10</figcaption>
-  </figure>
-  <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/0/20_t_390.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 20</figcaption>
+    <img src="p5a_pics/1/7/0/20_t_390.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 20</figcaption>
   </figure>
   <!-- original -->
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/1/test_im.png" alt="" style="width: 120px;">
+    <img src="p5a_pics/1/1/test_im.png" alt="" style="width: 200px;">
     	<figcaption>Berkeley Campanile</figcaption>
   </figure>
 </div>
 
-**Result 2: Self-selected image 1**
+**Result 2: Self-selected image 1: kusa.png**
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/kusa_1_t_960.png" alt="" style="width: 120px;">
-    <figcaption>kusa.png at Noise Level 1</figcaption>
+  <img src="p5a_pics/1/7/0/kusa_1_t_960.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/kusa_3_t_900.png" alt="" style="width: 120px;">
-    <figcaption>kusa.png at Noise Level 3</figcaption>
+  <img src="p5a_pics/1/7/0/kusa_3_t_900.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 3</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/kusa_5_t_840.png" alt="" style="width: 120px;">
-    <figcaption>kusa.png at Noise Level 5</figcaption>
+  <img src="p5a_pics/1/7/0/kusa_5_t_840.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 5</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/kusa_7_t_780.png" alt="" style="width: 120px;">
-    <figcaption>kusa.png at Noise Level 7</figcaption>
+  <img src="p5a_pics/1/7/0/kusa_7_t_780.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 7</figcaption>
   </figure>
   </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/kusa_10_t_690.png" alt="" style="width: 120px;">
-    <figcaption>kusa.png at Noise Level 10</figcaption>
+  <img src="p5a_pics/1/7/0/kusa_10_t_690.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 10</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/kusa_20_t_390.png" alt="" style="width: 120px;">
-    <figcaption>kusa.png at Noise Level 20</figcaption>
+  <img src="p5a_pics/1/7/0/kusa_20_t_390.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 20</figcaption>
   </figure>
   <!-- original, same folder / kusa_resized.png -->
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/kusa_resized.png" alt="" style="width: 120px;">
+  <img src="p5a_pics/1/7/0/kusa_resized.png" alt="" style="width: 200px;">
     <figcaption>kusa.png</figcaption>
   </figure>
 </div>
 
-**Result 3: Self-selected image 2**
+**Result 3: Self-selected image 2: pien.png**
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/pien_1_t_960.png" alt="" style="width: 120px;">
-    <figcaption>pien.png at Noise Level 1</figcaption>
+  <img src="p5a_pics/1/7/0/pien_1_t_960.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/pien_3_t_900.png" alt="" style="width: 120px;">
-    <figcaption>pien.png at Noise Level 3</figcaption>
+  <img src="p5a_pics/1/7/0/pien_3_t_900.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 3</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/pien_5_t_840.png" alt="" style="width: 120px;">
-    <figcaption>pien.png at Noise Level 5</figcaption>
+  <img src="p5a_pics/1/7/0/pien_5_t_840.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 5</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/pien_7_t_780.png" alt="" style="width: 120px;">
-    <figcaption>pien.png at Noise Level 7</figcaption>
+  <img src="p5a_pics/1/7/0/pien_7_t_780.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 7</figcaption>
   </figure>
   </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/pien_10_t_690.png" alt="" style="width: 120px;">
-    <figcaption>pien.png at Noise Level 10</figcaption>
+  <img src="p5a_pics/1/7/0/pien_10_t_690.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 10</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/pien_20_t_390.png" alt="" style="width: 120px;">
-    <figcaption>pien.png at Noise Level 20</figcaption>
+  <img src="p5a_pics/1/7/0/pien_20_t_390.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 20</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/0/pien_resized.png" alt="" style="width: 120px;">
+  <img src="p5a_pics/1/7/0/pien_resized.png" alt="" style="width: 200px;">
     <figcaption>pien.png</figcaption>
   </figure>
 </div>
@@ -532,38 +520,38 @@ Same as above, we pick some images from the web & hand-drawn and feed them into 
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/web/1_t_960.png" alt="" style="width: 120px;">
-    <figcaption>Web Image at Noise Level 1</figcaption>
+  <img src="p5a_pics/1/7/1/web/1_t_960.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/web/3_t_900.png" alt="" style="width: 120px;">
-    <figcaption>Web Image at Noise Level 3</figcaption>
+  <img src="p5a_pics/1/7/1/web/3_t_900.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 3</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/web/5_t_840.png" alt="" style="width: 120px;">
-    <figcaption>Web Image at Noise Level 5</figcaption>
+  <img src="p5a_pics/1/7/1/web/5_t_840.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 5</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/web/7_t_780.png" alt="" style="width: 120px;">
-    <figcaption>Web Image at Noise Level 7</figcaption>
+  <img src="p5a_pics/1/7/1/web/7_t_780.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 7</figcaption>
   </figure>
   </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/web/10_t_690.png" alt="" style="width: 120px;">
-    <figcaption>Web Image at Noise Level 10</figcaption>
+  <img src="p5a_pics/1/7/1/web/10_t_690.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 10</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/web/20_t_390.png" alt="" style="width: 120px;">
-    <figcaption>Web Image at Noise Level 20</figcaption>
+  <img src="p5a_pics/1/7/1/web/20_t_390.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 20</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/web/resized.png" alt="" style="width: 120px;">
+  <img src="p5a_pics/1/7/1/web/resized.png" alt="" style="width: 200px;">
     <figcaption>Web Image resized</figcaption>
   </figure>
 </div>
 
-**Result 2: Hand-drawn image 1**
+**Result 2: Hand-drawn image 1: A Cruise**
 
 <div>
 <figure style="text-align: center; margin: 10px;">
@@ -574,38 +562,38 @@ Same as above, we pick some images from the web & hand-drawn and feed them into 
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/1_1_t_960.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 1 at Noise Level 1</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/1_1_t_960.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/1_3_t_900.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 1 at Noise Level 3</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/1_3_t_900.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 3</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/1_5_t_840.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 1 at Noise Level 5</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/1_5_t_840.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 5</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/1_7_t_780.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 1 at Noise Level 7</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/1_7_t_780.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 7</figcaption>
   </figure>
   </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/1_10_t_690.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 1 at Noise Level 10</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/1_10_t_690.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 10</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/1_20_t_390.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 1 at Noise Level 20</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/1_20_t_390.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 20</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/1_resized.png" alt="" style="width: 120px;">
+  <img src="p5a_pics/1/7/1/drawn/1_resized.png" alt="" style="width: 200px;">
     <figcaption>Hand-drawn Image 1 resized</figcaption>
   </figure>
 </div>
 
-**Result 3: Hand-drawn image 2**
+**Result 3: Hand-drawn image 2: A Lemon**
 
 <div>
 <figure style="text-align: center; margin: 10px;">
@@ -617,33 +605,33 @@ Same as above, we pick some images from the web & hand-drawn and feed them into 
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/2_1_t_960.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 2 at Noise Level 1</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/2_1_t_960.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/2_3_t_900.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 2 at Noise Level 3</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/2_3_t_900.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 3</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/2_5_t_840.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 2 at Noise Level 5</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/2_5_t_840.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 5</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/2_7_t_780.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 2 at Noise Level 7</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/2_7_t_780.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 7</figcaption>
   </figure>
   </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/2_10_t_690.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 2 at Noise Level 10</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/2_10_t_690.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 10</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/2_20_t_390.png" alt="" style="width: 120px;">
-    <figcaption>Hand-drawn Image 2 at Noise Level 20</figcaption>
+  <img src="p5a_pics/1/7/1/drawn/2_20_t_390.png" alt="" style="width: 200px;">
+    <figcaption>Noise Level 20</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-  <img src="p5a_pics/1/7/1/drawn/2_resized.png" alt="" style="width: 120px;">
+  <img src="p5a_pics/1/7/1/drawn/2_resized.png" alt="" style="width: 200px;">
     <figcaption>Hand-drawn Image 2 resized</figcaption>
   </figure>
 </div>
@@ -674,7 +662,7 @@ where $\odot$ is the element-wise multiplication. This formula is to fill the ho
     	<figcaption>Inpainted</figcaption>
   </figure>
 </div>
-**Result 2: Self-selected image 1**
+**Result 2: Self-selected image 1** (Pagoda)
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
@@ -694,7 +682,7 @@ where $\odot$ is the element-wise multiplication. This formula is to fill the ho
     	<figcaption>Inpainted</figcaption>
   </figure>
 </div>
-**Result 3: Self-selected image 2**
+**Result 3: Self-selected image 2** (Pien)
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
@@ -722,105 +710,105 @@ In this part, we do the same as in 1.7 and 1.7.1. But we use a text prompt as th
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/1.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 1</figcaption>
+    <img src="p5a_pics/1/7/3/1.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/3.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 3</figcaption>
+    <img src="p5a_pics/1/7/3/3.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 3</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/5.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 5</figcaption>
+    <img src="p5a_pics/1/7/3/5.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 5</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/7.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 7</figcaption>
+    <img src="p5a_pics/1/7/3/7.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 7</figcaption>
   </figure>
   </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/10.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 10</figcaption>
+    <img src="p5a_pics/1/7/3/10.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 10</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/20.png" alt="" style="width: 120px;">
-    	<figcaption>Berkeley Campanile at Noise Level 20</figcaption>
+    <img src="p5a_pics/1/7/3/20.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 20</figcaption>
   </figure>
   <!-- original -->
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/1/test_im.png" alt="" style="width: 120px;">
+    <img src="p5a_pics/1/1/test_im.png" alt="" style="width: 200px;">
     	<figcaption>Berkeley Campanile</figcaption>
   </figure>
 </div>
 
-**Result 2: Self-selected image 1**
+**Result 2: Self-selected image 1: kusa.png**
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/kusa_1.png" alt="" style="width: 120px;">
-    	<figcaption>kusa.png at Noise Level 1</figcaption>
+    <img src="p5a_pics/1/7/3/kusa_1.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/kusa_3.png" alt="" style="width: 120px;">
-    	<figcaption>kusa.png at Noise Level 3</figcaption>
+    <img src="p5a_pics/1/7/3/kusa_3.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 3</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/kusa_5.png" alt="" style="width: 120px;">
-    	<figcaption>kusa.png at Noise Level 5</figcaption>
+    <img src="p5a_pics/1/7/3/kusa_5.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 5</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/kusa_7.png" alt="" style="width: 120px;">
-    	<figcaption>kusa.png at Noise Level 7</figcaption>
+    <img src="p5a_pics/1/7/3/kusa_7.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 7</figcaption>
   </figure>
   </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/kusa_10.png" alt="" style="width: 120px;">
-    	<figcaption>kusa.png at Noise Level 10</figcaption>
+    <img src="p5a_pics/1/7/3/kusa_10.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 10</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/kusa_20.png" alt="" style="width: 120px;">
-    	<figcaption>kusa.png at Noise Level 20</figcaption>
+    <img src="p5a_pics/1/7/3/kusa_20.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 20</figcaption>
   </figure>
   <!-- original, same folder / kusa_resized.png -->
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/0/kusa_resized.png" alt="" style="width: 120px;">
+    <img src="p5a_pics/1/7/0/kusa_resized.png" alt="" style="width: 200px;">
     	<figcaption>kusa.png</figcaption>
   </figure>
 </div>
 
-**Result 3: Self-selected image 2**
+**Result 3: Self-selected image 2: pien.png**
 
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/pien_1.png" alt="" style="width: 120px;">
-    	<figcaption>pien.png at Noise Level 1</figcaption>
+    <img src="p5a_pics/1/7/3/pien_1.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 1</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/pien_3.png" alt="" style="width: 120px;">
-    	<figcaption>pien.png at Noise Level 3</figcaption>
+    <img src="p5a_pics/1/7/3/pien_3.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 3</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/pien_5.png" alt="" style="width: 120px;">
-    	<figcaption>pien.png at Noise Level 5</figcaption>
+    <img src="p5a_pics/1/7/3/pien_5.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 5</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/pien_7.png" alt="" style="width: 120px;">
-    	<figcaption>pien.png at Noise Level 7</figcaption>
+    <img src="p5a_pics/1/7/3/pien_7.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 7</figcaption>
   </figure>
   </div>
 <div style="display: flex; justify-content: space-around;">
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/pien_10.png" alt="" style="width: 120px;">
-    	<figcaption>pien.png at Noise Level 10</figcaption>
+    <img src="p5a_pics/1/7/3/pien_10.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 10</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/3/pien_20.png" alt="" style="width: 120px;">
-    	<figcaption>pien.png at Noise Level 20</figcaption>
+    <img src="p5a_pics/1/7/3/pien_20.png" alt="" style="width: 200px;">
+    	<figcaption>Noise Level 20</figcaption>
   </figure>
   <figure style="text-align: center; margin: 10px;">
-    <img src="p5a_pics/1/7/2/pien_resized.png" alt="" style="width: 120px;">
+    <img src="p5a_pics/1/7/2/pien_resized.png" alt="" style="width: 200px;">
     	<figcaption>pien.png</figcaption>
   </figure>
 </div>
@@ -945,4 +933,428 @@ The logo is shown below:
 </div>
 
 # Part B
+
+## 1. Training a Single-Step Denoising UNet
+
+Given a noisy image $z$, we want to train a denoiser $D_\theta$ with UNet so as to map $z$ to a clean image $x$. L2 loss is used in this training process (as well as in the whole Part B)
+$$
+L=E_{z,x}||D_\theta(z)-x||^2\tag8
+$$
+
+### 1.1 Implementing the UNet
+
+![](https://cal-cs180.github.io/fa24/hw/proj5/assets/unconditional_arch.png)
+
+We implement an unconditional UNet as shown in the graph above, where operation blocks mentioned above are:
+
+![](https://cal-cs180.github.io/fa24/hw/proj5/assets/atomic_ops_new.png)
+
+### 1.2 Using the UNet to Train a Denoiser
+
+To train the unconditional UNet denoiser, we dynamically (not with pre-computed noises) generate $(z,x)$ pairs from clean images from the training data. The clean image drawn from the training data is $x$, and
+$$
+z=x+\sigma \epsilon,\quad\epsilon\sim N(0,I)\tag9
+$$
+We show varying levels of noise on MNIST digits, with $\sigma=[0.0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0]$.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/1/2/0/noisy_mnist.png" alt="" style="width: 800px;">
+    	<figcaption>Varying noise levels on MNIST digits</figcaption>
+  </figure>
+</div>
+#### 1.2.1 Training
+
+Now, we train the denoiser with $\sigma=0.5$, batch size 256, 128 hidden channels ($D=128$ where $D$ is mentioned in the above computation graph), and an Adam optimizer with a learning rate of 1e-4 on 5 epochs.
+
+The training loss curve is shown below.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/1/2/1/training_loss_curve.png" alt="" style="width: 1000px;">
+    	<figcaption>Training Loss Curve</figcaption>
+  </figure>
+</div>
+
+We visualize denoised results on the test set at the end of training.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/1/2/1/epoch_1_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Results on digits from the test set after 1 epoch of training</figcaption>
+  </figure>
+</div>
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/1/2/1/epoch_5_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Results on digits from the test set after 5 epoch of training</figcaption>
+  </figure>
+</div>
+
+#### 1.2.2 OOD Testing
+
+Though the denoiser is trained where $\sigma=0.5$, we can also perform out-of-distribution testing with a range of $\sigma$ which is 
+$\sigma=[0.0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0]$.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/1/2/2/denoised_mnist.png" alt="" style="width: 1000px;">
+    	<figcaption>Results on digits from the test set with varying noise levels</figcaption>
+  </figure>
+</div>
+
+## 2. Training a Diffusion Model
+
+Now, we are to implement [DDPM](https://arxiv.org/abs/2006.11239). We now want the UNet to predict the noise instead of the clean image, i.e. the model is $\epsilon_\theta$ and the loss is
+$$
+L=E_{\epsilon,z}||\epsilon_\theta(z)-\epsilon||^2\tag{10}
+$$
+From (2) we know
+$$
+x_t = \sqrt{\bar\alpha_t} x_0 + \sqrt{1 - \bar\alpha_t} \epsilon \quad \text{where}~ \epsilon \sim N(0, I) \tag{2}
+$$
+for a certain time step $t\in\{0,\cdots,T\}$ as the noise-adding process (the forward process). Because we have a varying noise level now, so we should condition the model on $t$ to let the model work. The time-conditional diffusion model has a computation graph as follows:
+
+![](https://cal-cs180.github.io/fa24/hw/proj5/assets/conditional_arch.png)
+
+where the `FCBlock` is
+
+![](https://cal-cs180.github.io/fa24/hw/proj5/assets/fc_long.png)
+
+In DDPM, we also have a noise schedule which is a list of $\beta_t,\alpha_t,\bar\alpha_t$. The relationship is:
+
++ $\beta_0=1e-4,\beta_T=0.02$ and $\beta_t$'s in between are uniformly spaced;
++ $\alpha_t=1-\beta_t$
++ $\bar\alpha_t=\prod_{s=1}^t \alpha_s$ is a cumulative product.
+
+### 2.1 Adding Time Conditioning to UNet
+
+We add an encoded time conditioning using broadcasting to the results of an `UpBlock` and an `Unflatten` layer as shown in the graph above.
+
+Now, the objective with time conditioning is
+$$
+L=E_{\epsilon,x_0,t}||\epsilon(x_t,t)-\epsilon||^2\tag{11}
+$$
+where $x_t$ is produced in (2).
+
+### 2.2 Training the Time-Conditional DDPM
+
+The training algorithm is as follows:
+
+![](https://cal-cs180.github.io/fa24/hw/proj5/assets/algo1_t_only.png)
+
+In the implementation, we train the DDPM on MNIST (same in parts below) with batch size 128, 20 epochs, $D=64$ and an Adak optimizer with an initial learning rate of 1e-3. An exponential LR decay scheduler with a gamma of $0.1^{1/\text{n\_epochs}}$ is also used. Also, $t$ is always normalized.
+
+The training loss curve is shown below.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/2/2/training_loss_curve.png" alt="" style="width: 1000px;">
+    	<figcaption>Training Loss Curve</figcaption>
+  </figure>
+</div>
+
+### 2.3 Sampling from the Time-Conditional DDPM
+
+Following the sampling algorithm of DDPM as follows:
+
+![](https://cal-cs180.github.io/fa24/hw/proj5/assets/algo2_t_only.png)
+
+we can now sample from the model. We show sampling results after the 5th and 20th epoch.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/2/3/epoch_5_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 5</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/2/3/epoch_5_animation.gif" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 5, animated</figcaption>
+  </figure>
+</div>
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/2/3/epoch_20_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 20</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/2/3/epoch_20_animation.gif" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 20, animated</figcaption>
+  </figure>
+</div>
+
+### 2.4 Adding Class-Conditioning to UNet
+
+We want the DDPM generate images given a specific class. To modify the UNet architecture, we can now add 2 more `FCBlock`s and feed them both with the one-hot class vectors which are masked to 0 with a probability $p_{\rm uncond}=0.1$ because we still want the model to preserve the ability of unconditional generation.
+
+When we are adding time conditioning, we now multiply the pre-addition hiddens elementwisely with the outputs of the `FCBlocks` passing the class signals.
+
+We use a same set of hyperparameters as in 2.2. The class-conditional training algorithm is as follows:
+
+![](https://cal-cs180.github.io/fa24/hw/proj5/assets/algo3_c.png)
+
+The training loss curve is shown below.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/2/4/training_loss_curve.png" alt="" style="width: 1000px;">
+    	<figcaption>Training Loss Curve</figcaption>
+  </figure>
+</div>
+
+### 2.5 Sampling from the Class-Conditional DDPM
+
+With class conditioning, we should also use classifier-free guidance mentioned in Part A. We use CFG with a guidance scale $\gamma=5.0$ for this part, and the sampling algorithm is as follows, where $\epsilon_u$ is the unconditioned predicted noise and $\epsilon_c$ is the conditioned one.
+
+![](https://cal-cs180.github.io/fa24/hw/proj5/assets/algo4_c.png)
+
+The sampling results are shown below. We can see the class signals are received very well.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/2/5/epoch_5_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 5</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/2/5/epoch_5_animation.gif" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 5, animated</figcaption>
+  </figure>
+</div>
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/2/5/epoch_20_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 20</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/2/5/epoch_20_animation.gif" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 20, animated</figcaption>
+  </figure>
+</div>
+
+## 3. Bells & Whistles: Improving Time-conditional UNet Architecture
+
+For ease of explanation and implementation, our UNet architecture above is pretty simple. 
+
+I added skip connections (shortcuts) in `ConvBlock`, `DownBlock` and `Upblock`, which is to add a plainly convoluted input (working as the residual a.k.a. the "identity") to the output of the block. We train with the same set of hyperparameters as in 2.2.
+
+The improved UNet can achieve a better test loss (0.02820390514746497) than the original (0.02956294636183147).
+
+The training loss curve is shown below.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/3/training_loss_curve.png" alt="" style="width: 1000px;">
+    	<figcaption>Training Loss Curve</figcaption>
+  </figure>
+</div>
+
+The sampling results are shown below.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/3/epoch_5_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 5</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/3/epoch_5_animation.gif" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 5, animated</figcaption>
+  </figure>
+</div>
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/3/epoch_20_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 20</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/3/epoch_20_animation.gif" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 20, animated</figcaption>
+  </figure>
+</div>
+## 4. Bells & Whistles: Rectified Flow
+
+Instead of DDPM, we now implement a novel SOTA framework named **[Rectified Flow](https://arxiv.org/abs/2209.03003)**.
+
+### 4.1 Overview
+
+Rectified Flow (RF) is a generative modeling method, which tries to transport data from source distribution $\pi_0$ (which corresponds to the pure Gaussian distribution $\pi_0=N(0,I)$) and the target distribution $\pi_1$, which is the distribution of clean images.
+
+The overall objective is to **align the velocity estimate **(using the UNet, denoted as $v_\theta$ now) **to the actual velocity** between the source image $X_0$ and the target image $X_1$. First, the timesteps here are all normalized between $t\in[0,1]$, instead of spreading in $\{0,\cdots, T\}$. 
+
+For a general case when $t\in[0,T']$, the velocity is $X_1-X_0\over T'$ while the displacement is $X_1-X_0$. Upon being normalized i.e. $T'=1$, we can numerically equal these two quantities.
+
+We define the **interpolation path** as
+$$
+X_t=tX_1+(1-t)X_0,\qquad t\in[0,1]\tag{12}
+$$
+where $X_0\sim \pi_0,X_1\sim\pi_1$. Then, the time-conditional objective is
+$$
+\min_\theta \int_0^1 \mathbb{E} \left[ \| (X_1 - X_0) - v_\theta(X_t, t) \|^2 \right] \mathrm d t\tag{13.1}
+$$
+and we can also add the class conditioning where $X_1\sim \pi_1|c$:
+$$
+\min_\theta \int_0^1 \mathbb{E} \left[ \| (X_1 - X_0) - v_\theta(X_t, t, c) \|^2 \right] \mathrm d t.\tag{13.2}
+$$
+We can see, we want the path as straight as possible.
+
+### 4.2 Training
+
+For an RF, the objective is listed above, which is to minimize over the whole dataset and also over all times. 
+
+However, as we all know, we can only estimate the integral $\int_0^1$ and the integral behind the $\mathbb E$ symbol, instead of directly computing. 
+
+For a time-conditional RF, using the Monte Carlo method, we can estimate the objective (loss) by
+$$
+L=\int_0^1 \mathbb{E} \left[ \| (X_1 - X_0) - v_\theta(X_t, t) \|^2 \right] \mathrm d t
+\\\approx\frac1n\sum_{i=1}^n 
+||x_{1}^{(i)}-x_0^{(i)}-v_\theta(x_t^{(i)},t^{(i)})||^2\tag{14.1}
+$$
+where $x_1^{(i)}$ is a data point (a clean image) drawn from the target distribution (the training dataset), $x_0^{(i)}$ is a dynamically-generated Gaussian noise (i.e. drawn from the source distribution), and $x_t^{(i)}$ is the interpolation where the timestep $t^{(i)}$ is sampled from a distribution of timesteps. The distribution of $t$ can be a discrete uniform on $\{0,\cdots, T\}$, a continuous uniform or other nonlinear schedules such as sigmoid-ed 1-d Gaussian.
+
+For a class-conditional RF, the estimate is
+$$
+L=\int_0^1 \mathbb{E} \left[ \| (X_1 - X_0) - v_\theta(X_t, t) \|^2 \right] \mathrm d t
+\\\approx\frac1n\sum_{i=1}^n 
+||x_{1}^{(i)}-x_0^{(i)}-v_\theta(x_t^{(i)},t^{(i)},c^{(i)})||^2\tag{14.2}
+$$
+where $c^{(i)}$ is the class determined by (of) the drawn $x_1^{(i)}$.
+
+The loss can be regarded as a L2 loss between the predicted velocity and the real displacement too. The algorithm is shown below:
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/rf_training.png" alt="" style="width: 1600px;">
+  </figure>
+</div>
+
+### 4.3 Sampling
+
+For a RF, we build an ODE to sample. The ODE setup for a time-conditional RF is
+$$
+\frac{dZ_t}{dt} = v_\theta(Z_t, t), \quad Z_0 \sim \pi_0\tag{15.1}
+$$
+and we want $Z_1$ as the generated image. The general form of the solution is
+$$
+Z_t = Z_0 + \int_{0}^{t} v_\theta(Z_s, s)\mathrm ds.\tag{16.1}
+$$
+Similarly, this integral is also not directly computable. We can use ODE solver (solving methods) to estimate this as well. 
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/rf_sampling.png" alt="" style="width: 1600px;">
+  </figure>
+</div>
+
+The methods can be Euler's method or RK45, and we implement the former as a simple but working one.
+
+The estimate for $Z_1$, using Euler's method, is
+$$
+Z_1\approx Z_0+{1\over T}\sum_{k=0}^{T-1}v_\theta(Z_{k/ T},{k\over T})\tag{17.1}
+$$
+where $\frac1T$ works as the sampling step size $\Delta t$.
+
+For a class-conditional RF, the framework is similar, but we specify the class $c$, so we have
+$$
+\frac{dZ_t}{dt} = v_\theta(Z_t, t,c), \quad Z_0 \sim \pi_0\tag{15.2},
+$$
+
+$$
+Z_t = Z_0 + \int_{0}^{t} v_\theta(Z_s,s, c)\mathrm ds,\tag{16.2}
+$$
+
+and the estimate
+$$
+Z_1\approx Z_0+{1\over T}\sum_{k=0}^{T-1}v_\theta(Z_{k/ T},{k\over T},c)\tag{17.2}.
+$$
+
+### 4.4 Implementation Detail and Results
+
+I implemented two kinds of RF (time/class-conditional) based on the structure of DDPM.
+
+I used the time-conditional UNet for the time-conditional RF, and the class-conditional UNet for the class-conditional one. The architecture of this core model remains same as in DDPM.
+
+Beta schedules (the list) is no longer needed, but the number of timesteps as a hyperparameter is still necessary for the forward and sampling methods to generate an estimate. 
+
+For the class-conditional RF, the CFG is also slightly changed to guide the conditioned velocity estimate instead of the noise estimate, from the unconditioned counterpart:
+$$
+Z_1\approx Z_0+{1\over T}\sum_{k=0}^{T-1}\gamma v_\theta(Z_{k/ T},{k\over T},c)+(1-\gamma)v_\theta(Z_{k/ T},{k\over T},0)
+\tag{18}.
+$$
+
+We train with the same set of hyperparameters as in 2.2. The training and testing loss are higher than those in DDPM training, but the generated (sampled) images are fairly good and unnoised.
+
+#### Results of Time-Conditional RF
+
+The training loss curve for the time-conditional RF is shown below.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/timecond/training_loss_curve.png" alt="" style="width: 1000px;">
+    	<figcaption>Training Loss Curve</figcaption>
+  </figure>
+</div>
+
+The sampling results for the time-conditional RF are shown below.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/timecond/epoch_5_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 5</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/timecond/epoch_5_animation.gif" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 5, animated</figcaption>
+  </figure>
+</div>
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/timecond/epoch_20_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 20</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/timecond/epoch_20_animation.gif" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 20, animated</figcaption>
+  </figure>
+</div>
+
+#### Results of Class-Conditional RF
+The training loss curve for the class-conditional RF is shown below.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/classcond/training_loss_curve.png" alt="" style="width: 1000px;">
+    	<figcaption>Training Loss Curve</figcaption>
+  </figure>
+</div>
+
+The sampling results for the class-conditional RF are shown below.
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/classcond/epoch_5_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 5</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/classcond/epoch_5_animation.gif" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 5, animated</figcaption>
+  </figure>
+</div>
+
+<div style="display: flex; justify-content: space-around;">
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/classcond/epoch_20_sample_results.png" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 20</figcaption>
+  </figure>
+  <figure style="text-align: center; margin: 10px;">
+    <img src="p5b_pics/4/classcond/epoch_20_animation.gif" alt="" style="width: 1000px;">
+    	<figcaption>Epoch 20, animated</figcaption>
+  </figure>
+</div>
+
+## 5. Bells & Whistles: Sampling Gifs
+
+I implemented the GIF generating code, and the generated Gifss are juxtaposed with static images in every section above and below.
 
